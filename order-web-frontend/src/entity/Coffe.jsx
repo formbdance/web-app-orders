@@ -5,8 +5,8 @@ export const Coffe = (props) => {
     price: props.option.price,
   };
   return (
-    <div style={{ width: "136px", height: "128px" }}>
-      <div className="w-full h-full bg-gray-200 rounded-lg" />
+    <div className="w-full">
+      <div className="w-full h-28 bg-gray-200 rounded-lg" />
       <div className="flex flex-col w-fit items-start">
         <span className="font-semibold text-sm">{data.title}</span>
         <div className="flex flex-col gap-3">

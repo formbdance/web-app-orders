@@ -1,6 +1,5 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { elevateModal } from "@/lib/features/modals/rentSlice";
 
 export const ModalView = () => {

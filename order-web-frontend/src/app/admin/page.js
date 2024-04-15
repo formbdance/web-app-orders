@@ -9,6 +9,7 @@ export default function Admin() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target)
+        e.target.reset()
         dispatch(saveProduct({data: formData}))
     }
 

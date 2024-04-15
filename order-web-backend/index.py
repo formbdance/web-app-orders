@@ -40,6 +40,7 @@ def add_product():
 def get_products():
     try:
         products = productsdb.find({})
+        print('done')
         return json.loads(json_util.dumps(products)), 200  # преобразование mongo bson в json
     except:
         return 'Ошибка получения продуктов', 500

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api_url = 'http://127.0.0.1:5000';
 
-export async function getProduct(options) {
+export async function getProducts() {
     const res = await axios.get(`${api_url}/products`)
     if (res.status !== 200) {
         throw new Error('Ошибка при получении продуктов')

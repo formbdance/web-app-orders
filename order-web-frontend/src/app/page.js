@@ -8,8 +8,8 @@ export default function Home() {
   
 
   return (
-    <main className="w-full h-screen bg-gray-50">
-      <section className="w-full h-full flex items-center justify-center pb-24 ">
+    <main className="">
+      <section className="h-screen w-full flex items-center justify-center pb-24 ">
         <div className="flex items-center justify-center flex-col gap-y-6 px-7">
           <div className="flex flex-col items-center gap-1">
           <h2 className="text-4xl font-bold text-center">Заказать <span style={{color:'#FCBB42'}}>кофе</span> <br /> онлайн</h2>
