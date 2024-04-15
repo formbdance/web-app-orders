@@ -11,7 +11,7 @@ export const ModalView = () => {
     <div
       className={`${
         modalState.value ? "flex" : "hidden"
-      } absolute w-screen h-screen top-0 left-0 items-center justify-center`}
+      } absolute w-full h-full top-0 left-0 items-center justify-center`}
     >
       <div
         onClick={() => dispatch(elevateModal())}

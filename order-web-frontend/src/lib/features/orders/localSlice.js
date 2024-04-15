@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const ordersSlice = createSlice({
-  name: 'order',
+export const localSlice = createSlice({
+  name: 'locals',
   initialState: {
     value: 0
   },
@@ -15,7 +15,7 @@ export const ordersSlice = createSlice({
   }
 })
 
-export const { incremented, decremented } = ordersSlice.actions
+export const { incremented, decremented } = localSlice.actions
 
 
 
