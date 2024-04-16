@@ -4,7 +4,8 @@ import json
 from bson import json_util
 from bson.objectid import ObjectId
 from pymongo import MongoClient
-
+from werkzeug.utils import secure_filename
+import os
 
 UPLOAD_FOLDER = '/path/to/the/uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -28,8 +29,18 @@ def add_product():
     try:
         # получение данных с запроса
         data = request
+        # Получение файла из формы
+        file = request.files['image']
+        # Получение имени файла и расширения
+        filename, extension = os.path.splitext(file.filename)
         # сохраняем в монго
-        productsdb.insert_one(data.form.to_dict()) 
+        insertFile = productsdb.insert_one(data.form.to_dict()) 
+        # Создание пути для сохранения файла
+        folder = 'static/images'
+        path = os.path.join(folder, f'{insertFile.inserted_id}{extension}')
+        # Сохранение файла
+        file.save(path)
+
         return 'Продукт добавлен', 201
     except Exception as e:
         print(e)
@@ -54,6 +65,17 @@ def get_product():
         return json.loads(json_util.dumps(products))
     except:
         return 'Ошибка получения продукта', 500
+
+# удаление всех продуктов
+@app.route('/products', methods=['DELETE'])
+def removed_products():
+    try:
+        filter = {}
+        productsdb.delete_many(filter)
+        return 'Продукт удалён', 204
+    except:
+        return 'Ошибка удаления продукта', 500
+
 
 # удаление продукта <id>
 @app.route('/products/<id>', methods=['DELETE'])

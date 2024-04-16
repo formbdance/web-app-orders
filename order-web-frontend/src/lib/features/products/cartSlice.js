@@ -5,9 +5,12 @@ const cartSlice = createSlice({
 	name: 'cart',
 	initialState: {
 		
-		products: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [],
+		products: [],
 	},
 	reducers: {
+		getItem: (state) => {
+			state.products = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []
+		},
 		addItem: (state, action) => {
 			const foundItem = state.products.find((item) => item._id === action.payload._id);
 			if (foundItem) {
@@ -25,6 +28,6 @@ const cartSlice = createSlice({
 	},
 });
 
-export const { addItem, clearCart } = cartSlice.actions
+export const { addItem, clearCart, getItem } = cartSlice.actions
 
 export default cartSlice.reducer;

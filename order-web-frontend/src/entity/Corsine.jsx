@@ -2,9 +2,15 @@
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { elevateModal } from "@/lib/features/modals/rentSlice";
+import { useEffect } from "react";
+import { getItem } from "@/lib/features/products/cartSlice";
 export const Corsine = () => {
   const cartState = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getItem());
+  }, [dispatch]);
 
   return (
     <div
