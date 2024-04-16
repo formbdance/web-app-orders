@@ -23,6 +23,45 @@ export async function saveProduct(options) {
     if (res.status !== 200) {
         throw new Error('Ошибка при сохранении продукта!')
     }
+    return res.data
+}
+
+// ОРДЕРА
+
+// получение ордеров
+export async function getOrders() {
+    const res = await axios.get(`${api_url}/orders`)
+    if (res.status !== 200) {
+        throw new Error('Ошибка при получении ордеров')
+    }
     
+    return res.data
+}
+
+// удаление ордера
+export async function deleteOrder(options) {
+    const res = await axios.delete(`${api_url}/orders/${options.data._id}`)
+    if (res.status !== 204) {
+        throw new Error('Ошибка при удалении ордера')
+    }
+    
+    return res.data
+}
+
+
+// сохранение ордера
+export async function saveOrder(options) {
+    console.log(options)
+    const res = await axios.post(`${api_url}/orders`, options.data, 
+    {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            "Access-Control-Allow-Origin": "*"
+        }
+    },
+    )
+    if (res.status !== 200) {
+        throw new Error('Ошибка при сохранении продукта!')
+    }
     return res.data
 }

@@ -1,10 +1,16 @@
 "use client"
 import { useDispatch, useSelector } from "react-redux";
 import { saveProduct } from "@/lib/features/products/productsSlice";
-
+import { useEffect } from "react";
+import { deleteOrder, getOrders } from "@/lib/features/orders/orderSlice";
 export default function Admin() {
     const dispatch = useDispatch();
+    const ordersState = useSelector((state) => state.orders);
     
+    useEffect(() => {
+        dispatch(getOrders())
+    }, [dispatch, ordersState.deleteStatus])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -13,8 +19,14 @@ export default function Admin() {
         dispatch(saveProduct({data: formData}))
     }
 
+    const handleDelete = (e) => {
+        e.preventDefault();
+        dispatch(deleteOrder({data : {_id: e.target.value}}))
+    }
+
     return (
-        <main>
+        <main className="flex flex-col gap-y-8 py-6 px-2">
+            <h4 className="font-semibold text-lg">Добавление продукта</h4>
             <form onSubmit={(e) => handleSubmit(e)} className="px-6 mt-8 flex flex-col gap-4">
                 <button
                     className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] flex items-center gap-3"
@@ -62,6 +74,56 @@ export default function Admin() {
                     Добавть в меню!
                 </button>
             </form>
+            <section>
+                <h4 className="font-semibold text-lg">Свежие заказы</h4>
+                <div>
+                    {
+                        Array.isArray(ordersState.orders) && ordersState.orders.length > 0 ? 
+                        (
+                            ordersState.orders.map((item, index) => {
+                                return (
+                                    <div key={item._id.$oid} >
+                                        <span>Заказ номер: {index}</span>
+                                        {
+                                            Array.isArray(JSON.parse(item.productsList)) && JSON.parse(item.productsList).length > 0 ? 
+                                            (
+                                                <table className="table-auto w-full">
+                                                    <thead className="">
+                                                    <tr>
+                                                        <th>id</th>
+                                                        <th>Название</th>
+                                                        <th>Кол-во</th>
+                                                        <th>Цена</th>
+                                                    </tr>
+                                                    </thead>
+                                                <tbody>
+                                                {JSON.parse(item.productsList).map((item, index) => {
+                                                    return(
+                                                        <tr key={index} className="text-center">
+                                                            <td>{index}</td>
+                                                            <td>{item.title}</td>
+                                                            <td>{item.count}</td>
+                                                            <td>{item.count * Number(item.price)}</td>
+                                                      </tr>
+                                                    )
+                                                })}
+                                                    </tbody>
+                                                </table>
+                                            
+                                            ) : (
+                                                <div>Нет записей</div>
+                                            )
+                                        }
+                                        <button onClick={(e) => handleDelete(e)} value={item._id.$oid}>del</button>
+                                    </div>
+                                )
+                            })
+                        ) : (
+                            <>Ордеров нет</>
+                        )
+                    }
+                </div>
+            </section>
         </main>
     )
 }

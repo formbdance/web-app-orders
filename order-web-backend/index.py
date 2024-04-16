@@ -71,13 +71,14 @@ def delete_product(id):
 def add_order(): 
     try:
         # получение данных с запроса
-        data = request.json 
+        data = request
         # сохраняем в монго
-        ordersdb.insert_one(data) 
+        ordersdb.insert_one(data.form.to_dict()) 
         return 'Ордер добавлен', 201
-    except:
-        return 'Ошибка добавления ордера', 500
-
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Произошла ошибка'}, 500)
+    
 # получение данных из БД
 @app.route('/orders', methods=['GET'])
 def get_orders():

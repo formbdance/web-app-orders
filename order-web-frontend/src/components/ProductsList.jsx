@@ -10,10 +10,6 @@ export const ProductsList = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(productsState);
-  }, [productsState.products]);
-
   const data = {
     title: "caputino",
     description: "Классический капучино из кофейни",
