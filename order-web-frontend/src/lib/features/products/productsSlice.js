@@ -24,7 +24,7 @@ const productsSlice = createSlice({
             state.products = action.payload;
         })
         .addCase(getProducts.rejected, (state, action) => {
-            state.loadError = true;
+            state.loadError = true
         })
         .addCase(saveProduct.pending, (state) => {
             state.saveError = false;

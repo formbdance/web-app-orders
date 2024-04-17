@@ -4,6 +4,7 @@ import { elevateModal } from "@/lib/features/modals/rentSlice";
 import { useEffect, useState } from "react";
 import { saveOrder } from "@/lib/features/orders/orderSlice";
 import { clearCart } from "@/lib/features/products/cartSlice";
+import Image from "next/image";
 
 export const ModalView = () => {
   const modalState = useSelector((state) => state.rentModal);
@@ -36,8 +37,10 @@ export const ModalView = () => {
     const formData = new FormData();
     formData.append("productsList", JSON.stringify(cart.products));
     formData.append("userOwned", "Admin");
+    formData.append("status", "created");
     dispatch(saveOrder({ data: formData }));
     handleClearCart(e);
+    dispatch(elevateModal());
   };
 
   return (
@@ -86,7 +89,11 @@ export const ModalView = () => {
               onClick={(e) => handleClearCart(e)}
               className="bg-yellow-400 text-sm  rounded-full w-8 h-8"
             >
-              М
+              <Image
+                src={require("@/UI/ico/trash.png")}
+                className="p-1.5"
+                alt=""
+              />
             </button>
             <div className="flex gap-2 items-center">
               <span className="">

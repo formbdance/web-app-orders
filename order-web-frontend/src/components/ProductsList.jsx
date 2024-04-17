@@ -10,16 +10,10 @@ export const ProductsList = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  const data = {
-    title: "caputino",
-    description: "Классический капучино из кофейни",
-    price: 276,
-  };
-
   return (
     <div className="grid grid-cols-2 px-3 place-items-center gap-6 items-start">
       {productsState.loadError ? (
-        <>Ошибка загрузки товаров</>
+        <>{String(productsState.loadError)}</>
       ) : Array.isArray(productsState.products) &&
         productsState.products.length < 0 ? (
         <>Список товаров пуст</>

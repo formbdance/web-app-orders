@@ -1,7 +1,8 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addItem } from "@/lib/features/products/cartSlice";
+import Image from "next/image";
 export const Coffe = (props) => {
   const dispatch = useDispatch();
   const data = {
@@ -19,8 +20,14 @@ export const Coffe = (props) => {
 
   return (
     <div className="w-full">
-      <div className="w-full h-28 bg-gray-200 rounded-lg" />
-      <div className="flex flex-col w-fit items-start">
+      <Image
+        src={`http://localhost:5000/static/images/${data._id}.png`}
+        width={524}
+        height={524}
+        className="rounded-lg"
+        alt=""
+      />
+      <div className="flex flex-col w-fit items-start mt-1">
         <span className="font-semibold text-sm">{data.title}</span>
         <div className="flex flex-col gap-3">
           <span className="text-xs">{data.description}</span>

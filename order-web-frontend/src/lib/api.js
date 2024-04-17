@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api_url = 'http://127.0.0.1:5000';
+const api_url = 'http://192.168.0.2:5000';
 
 export async function getProducts() {
     const res = await axios.get(`${api_url}/products`)
@@ -27,6 +27,8 @@ export async function saveProduct(options) {
 }
 
 // ОРДЕРА
+
+
 
 // получение ордеров
 export async function getOrders() {
@@ -62,6 +64,21 @@ export async function saveOrder(options) {
     )
     if (res.status !== 200) {
         throw new Error('Ошибка при сохранении продукта!')
+    }
+    return res.data
+}
+// изменение
+export async function editOrder(options) {
+    const res = await axios.put(`${api_url}/orders/${options.data._id}`, options.data, 
+    {
+        headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*"
+        }
+    },
+    )
+    if (res.status !== 200) {
+        throw new Error('Ошибка при редактировании продукта!')
     }
     return res.data
 }

@@ -4,7 +4,7 @@ import * as api from "@/lib/api";
 export const getOrders = createAsyncThunk('orders/getOrders', api.getOrders);
 export const saveOrder = createAsyncThunk('orders/saveOrder', api.saveOrder);
 export const deleteOrder = createAsyncThunk('orders/deleteOrder', api.deleteOrder);
-
+export const editOrder = createAsyncThunk('orders/editOrder', api.editOrder);
 
 const ordersSlice = createSlice({
     name: 'orders',
@@ -15,6 +15,7 @@ const ordersSlice = createSlice({
         saveError: false,
         deleteStatus: false,
         deleteError: false,
+        editStatus: false,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -50,6 +51,15 @@ const ordersSlice = createSlice({
         .addCase(deleteOrder.rejected, (state) => {
             state.deleteError = true;
             state.deleteStatus = false;
+        })
+        .addCase(editOrder.pending, (state) => {
+            state.editStatus = false
+        })
+        .addCase(editOrder.fulfilled, (state) => {
+            state.editStatus = true
+        })
+        .addCase(editOrder.rejected, (status) => {
+            state.editStatus = false
         })
     }
 })

@@ -111,14 +111,21 @@ def get_orders():
         return 'Ошибка получения', 500
 
 # получение данных об ордере <id> из БД
-@app.route('/orders/<id>', methods=['GET'])
-def get_order():
+@app.route('/orders/<order_id>', methods=['PUT'])
+def update_order(order_id):
     try:
-        filter = {'_id': ObjectId(id)}
-        orders = ordersdb.find(filter)
-        return json.loads(json_util.dumps(orders))
-    except:
-        return 'Ошибка получения', 500
+        # Получить новый статус из тела запроса
+        new_status = request.json.get('status')
+
+        # Обновить заказ с указанным _id
+        result = ordersdb.update_one({'_id': ObjectId(order_id)}, {'$set': {'status': new_status}})
+
+        if result.modified_count:
+            return 'Статус заказа успешно обновлен', 200
+        else:
+            return 'Заказ с указанным _id не найден', 404
+    except Exception as e:
+        return f'Ошибка обновления заказа: {str(e)}', 500
 
 # удаление ордера <id>
 @app.route('/orders/<id>', methods=['DELETE'])
@@ -130,6 +137,17 @@ def delete_order(id):
     except:
         return 'Ошибка удаления', 500
     
+#картинки
+@app.route('/images/<path:image_name>', methods=['GET'])
+def get_image(image_name):
+    try:
+        # Путь к папке с изображениями (например, static/images)
+        folder = 'static/images'
+        
+        # Отправить файл из папки с изображениями
+        return (folder, image_name)
+    except Exception as e:
+        return f'Ошибка получения изображения: {str(e)}', 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="192.168.0.2", port=5000, debug=True)
