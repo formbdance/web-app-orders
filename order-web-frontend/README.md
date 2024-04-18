@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Приложение в стадии разработки!
+## Веб-приложение агрегатор заказов
+Агрегатор который решает проблему с приёмом заказов у клиента
+* Выставляем продукцию
+* Приглашаем клиентов
+* Клиент формирует заказ
+* Вы получаете заказ в удобной форме для дальнейшей его обработки
 
-## Getting Started
 
-First, run the development server:
+## Стэк технологий
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### Frontend
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* JavaScript
+* Nextjs
+* Redux/toolkit
+* tailwind
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+#### Backend
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+* Python
+* Flask
+* Mongodb
 
-## Learn More
+## Запуск
 
-To learn more about Next.js, take a look at the following resources:
+#### Frontend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* Скачать репо
+* npm init для зависимостей
+* npm run dev 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+#### Backend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Установить зависимости
+* py index.py
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### Превью
+
+### Главная страница:
+![main](https://github.com/formbdance/web-app-orders/assets/48482611/23bbc7b3-db95-46e3-9cfc-755b7a212546)
+
+### Меню продуктов:
+![coffes](https://github.com/formbdance/web-app-orders/assets/48482611/7a27114e-7bb9-4be8-9129-ad54028b0a5f)
+
+### Оформление заказа:
+![modalOrder](https://github.com/formbdance/web-app-orders/assets/48482611/ab5480b3-13b1-4dd9-85ee-12e6cdbc4c4d)
+
+### Админка (заказ не принят):
+![adminPage](https://github.com/formbdance/web-app-orders/assets/48482611/87156e4b-da03-44c1-a5e6-070b7d37db1e)
+
+### Заказ принят:
+![acceptedOrder](https://github.com/formbdance/web-app-orders/assets/48482611/a7d7885b-aad6-422d-a621-327c738f455d)
+
+
